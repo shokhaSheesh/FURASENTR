@@ -1,5 +1,6 @@
 ---
 import Contacts from './Contacts.astro';
+import { withBase } from '../lib/paths';
 import StoreButtons from './StoreButtons.astro';
 import { settings, type Content } from '../content/site';
 interface Props { t: Content }
@@ -12,7 +13,7 @@ const links = [
 <footer class="footer">
   <div class="container footer__grid">
     <div>
-      <img src="/brand/logo.svg" alt={t.a11y.logoAlt} width="96" height="97" loading="lazy" />
+      <img src={withBase('/brand/logo.svg')} alt={t.a11y.logoAlt} width="96" height="97" loading="lazy" />
       <p>{t.footer.about}</p>
     </div>
     <nav aria-labelledby="footer-sections">

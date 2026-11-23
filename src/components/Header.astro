@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import { withBase } from '../lib/paths';
 import { localeNames, localePaths, settings, type Content, type Locale } from '../content/site';
 interface Props { t: Content; locale: Locale }
 const { t, locale } = Astro.props;
@@ -9,7 +10,7 @@ const login = settings.loginUrl ?? '#download';
 <header class="site-header">
   <div class="container site-header__row">
     <a class="logo" href="#top" aria-label={t.a11y.home}>
-      <img src="/brand/logo.svg" alt={t.a11y.logoAlt} width="84" height="85" fetchpriority="high" />
+      <img src={withBase('/brand/logo.svg')} alt={t.a11y.logoAlt} width="84" height="85" fetchpriority="high" />
     </a>
     <nav id="main-nav" class="main-nav" aria-label={t.a11y.mainNav}>
       <ul>
@@ -19,7 +20,7 @@ const login = settings.loginUrl ?? '#download';
     <div class="site-header__actions">
       <div class="lang" role="group" aria-label={t.a11y.language}>
         {languages.map((code) => (
-          <a href={localePaths[code]} hreflang={code} lang={code} aria-label={localeNames[code]} aria-current={code === locale ? 'true' : undefined}>{code.toUpperCase()}</a>
+          <a href={withBase(localePaths[code])} hreflang={code} lang={code} aria-label={localeNames[code]} aria-current={code === locale ? 'true' : undefined}>{code.toUpperCase()}</a>
         ))}
       </div>
       <a class="btn btn--ghost btn--sm header-download" href="#download" aria-label={t.download}><Icon name="download" size={19} /><span>{t.download}</span></a>

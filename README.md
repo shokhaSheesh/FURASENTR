@@ -7,7 +7,10 @@ Static one-page site built with Astro. Languages: Russian at `/`, Uzbek (Latin) 
     npm install
     npm run dev       # development
     npm run build     # production files in dist/
-    npm run preview   # serve the built site on port 4321
+    npm run preview   # serve at http://localhost:4321/FURASENTR/
+    npm run publish:pages   # copy the build to the repo root for GitHub Pages
+
+**Deploy:** GitHub Pages serves the root of `main`. Run `npm run publish:pages`, then commit and push. Files at the root such as `index.html`, `uz/` and `_astro/` are generated, so edit `src/` instead.
 
 ## Edit content
 
@@ -52,4 +55,3 @@ Also before launch:
 - Set `settings.showDynamicLabels` to `false`.
 - Remove `<meta name="robots" content="noindex">` from `src/pages/index.astro`.
 - Add the Kinetika font files if licensed. Montserrat is the Cyrillic stand-in for now.
-- Configure hosting to run `npm run build` and publish `dist/`.
