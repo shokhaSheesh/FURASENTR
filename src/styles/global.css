@@ -222,6 +222,15 @@ a.store:hover { background: var(--navy); }
   .header-download { width: 46px; padding: 0; }
 }
 
+/* Backend field labels (settings.showDynamicLabels) */
+.show-dynamic [data-dynamic] { position: relative; outline: 2px dashed #1d4ed8; outline-offset: 2px; }
+.show-dynamic [data-dynamic]::after { content: attr(data-dynamic); position: absolute; z-index: 5; top: 6px; right: 6px; max-width: calc(100% - 12px); padding: 2px 7px; overflow: hidden; background: #1d4ed8; color: #fff; border-radius: 4px; font: 700 10px/1.5 ui-monospace, Menlo, Consolas, monospace; font-style: normal; letter-spacing: 0; text-overflow: ellipsis; text-transform: none; white-space: nowrap; pointer-events: none; }
+.show-dynamic .phone[data-dynamic]::after { top: 16px; right: 16px; max-width: calc(100% - 32px); }
+.show-dynamic .btn[data-dynamic]::after, .show-dynamic .store[data-dynamic]::after { top: -10px; right: 10px; max-width: calc(100% - 20px); }
+.show-dynamic .brands__wrap[data-dynamic]::after { top: 0; right: 0; max-width: 100%; }
+.show-dynamic .contacts [data-dynamic] { flex-wrap: wrap; outline-offset: 3px; }
+.show-dynamic .contacts [data-dynamic]::after { position: static; max-width: 100%; }
+
 /* Tablet and mobile */
 @media (max-width: 1099px) {
   .burger { display: grid; }

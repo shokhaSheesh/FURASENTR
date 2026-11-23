@@ -17,6 +17,25 @@ Everything editable is in `src/content/site.ts`: texts, category names and photo
 
 **Add Uzbek:** copy `ru` to `uz` in `site.ts`, translate the values, add it to `locales`, and create `src/pages/uz/index.astro`.
 
+## Backend-driven fields
+
+These fields are labeled in blue on the page. The label text is the field key. The values are still local until the API exists.
+
+| Key | Type | Shown in |
+| --- | --- | --- |
+| `screens.marketplace` | image URL | Marketplace phone |
+| `screens.trucks` | image URL | Грузовики phone |
+| `screens.jobs` | image URL | Работа phone |
+| `screens.garage` | image URL | Автопарк phone |
+| `stores.google_play_url` | URL | All Google Play buttons and section CTAs |
+| `stores.app_store_url` | URL | All App Store buttons |
+| `categories[]` | list of `{ name, image, alt }` | Marketplace category cards |
+| `truck_brands[]` | list of strings | Грузовики brand list |
+| `contacts.dealer.phone`, `.telegram`, `.email` | string | Стать дилером |
+| `contacts.support.phone`, `.telegram`, `.email` | string | Footer |
+
+Set `settings.showDynamicLabels` to `false` in `src/content/site.ts` to hide the labels. It must be `false` at launch.
+
 ## To fill before launch
 
 | Item | Where in `site.ts` |
@@ -30,6 +49,7 @@ Everything editable is in `src/content/site.ts`: texts, category names and photo
 
 Also before launch:
 
+- Set `settings.showDynamicLabels` to `false`.
 - Remove `<meta name="robots" content="noindex">` from `src/pages/index.astro`.
 - Add the Kinetika font files if licensed. Montserrat is the Cyrillic stand-in for now.
 - Configure hosting to run `npm run build` and publish `dist/`.

@@ -1,8 +1,8 @@
 ---
 import Icon from './Icon.astro';
 import type { Content } from '../content/site';
-interface Props { t: Content; data: { phone: string | null; telegram: string | null; email: string | null } }
-const { t, data } = Astro.props;
+interface Props { t: Content; scope: 'dealer' | 'support'; data: { phone: string | null; telegram: string | null; email: string | null } }
+const { t, scope, data } = Astro.props;
 const rows = [
   { key: 'phone', icon: 'phone', value: data.phone, href: data.phone && `tel:${data.phone.replace(/[^+\d]/g, '')}`, label: t.placeholder.phone },
   { key: 'telegram', icon: 'send', value: data.telegram?.replace('https://t.me/', '@'), href: data.telegram, label: t.placeholder.telegram },
@@ -11,7 +11,7 @@ const rows = [
 ---
 <ul class="contacts">
   {rows.map((r) => (
-    <li>
+    <li data-dynamic={`contacts.${scope}.${r.key}`}>
       <Icon name={r.icon} size={20} />
       {r.value && r.href
         ? <a href={r.href}>{r.value}</a>

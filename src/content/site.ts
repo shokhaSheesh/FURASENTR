@@ -9,6 +9,9 @@
  */
 
 export const settings = {
+  /** Shows blue labels on backend-driven fields. Set to false before launch. */
+  showDynamicLabels: true,
+
   stores: {
     googlePlay: 'https://play.google.com/store/apps/details?id=io.udevs.furasentr_mobile',
     /** PLACEHOLDER: full App Store link, e.g. https://apps.apple.com/app/id0000000000 */
