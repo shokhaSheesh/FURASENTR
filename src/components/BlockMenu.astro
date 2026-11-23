@@ -1,0 +1,34 @@
+---
+import Icon from './Icon.astro';
+import type { Content } from '../content/site';
+interface Props { t: Content }
+const { t } = Astro.props;
+const items = [
+  { id: 'marketplace', icon: 'cart', ...t.menu.marketplace },
+  { id: 'trucks', icon: 'truck', ...t.menu.trucks },
+  { id: 'jobs', icon: 'briefcase', ...t.menu.jobs },
+  { id: 'fleet', icon: 'layers', ...t.menu.fleet },
+] as const;
+---
+<div class="bm-sentinel" aria-hidden="true"></div>
+<nav class="bm" aria-label={t.a11y.blockNav}>
+  <div class="container">
+    <ul class="bm__list">
+      {items.map((item, i) => (
+        <li>
+          <a class:list={['bm__card', { 'is-active': i === 0 }]} href={`#${item.id}`} data-spy={item.id}>
+            <Icon name={item.icon} size={30} class="bm__icon" />
+            <span class="bm__text"><b>{item.title}</b><small>{item.text}</small></span>
+            <Icon name="arrow" size={22} class="bm__arrow" />
+          </a>
+        </li>
+      ))}
+      <li class="bm__dealer-item">
+        <a class="bm__card bm__card--dealer" href="#dealer" data-spy="dealer">
+          <Icon name="dealer" size={22} class="bm__icon" />
+          <span class="bm__text"><b>{t.menu.dealer.title}</b></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,29 @@
+---
+import { settings, type Content } from '../content/site';
+interface Props { t: Content; class?: string }
+const { t, class: className } = Astro.props;
+const apple = settings.stores.appStore;
+---
+<ul class:list={['stores', className]} aria-label={t.a11y.stores}>
+  <li>
+    <a class="store" href={settings.stores.googlePlay} target="_blank" rel="noopener" data-store="google">
+      <svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><path fill="#FFCB00" d="M1 1.500v25L14 14z"/><path fill="#fff" d="m1 1.500 13 12.500 4-4z"/><path fill="#D9D9D9" d="m1 26.500 13-12.500 4 4z"/><path fill="#FFCB00" d="m18 10-4 4 4 4 7-4z"/></svg>
+      <span><small>{t.store.googleTop}</small><b>{t.store.googleName}</b></span>
+      <span class="sr-only">(откроется в новой вкладке)</span>
+    </a>
+  </li>
+  <li>
+    {apple ? (
+      <a class="store" href={apple} target="_blank" rel="noopener" data-store="apple">
+        <svg width="24" height="28" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.700 268.700c-.2-36.700 16.400-64.400 50-84.800-18.800-26.900-47.200-41.700-84.700-44.600-35.500-2.800-74.300 20.700-88.500 20.700-15 0-49.400-19.700-76.400-19.700C63.300 141.200 4 184.800 4 273.500q0 39.300 14.400 81.200c12.800 36.700 59 126.700 107.200 125.200 25.200-.6 43-17.900 75.800-17.900 31.800 0 48.300 17.900 76.400 17.900 48.600-.7 90.400-82.500 102.600-119.300-65.200-30.700-61.700-90-61.700-91.900zm-56.600-164.200c27.300-32.400 24.800-61.900 24-72.500-24.100 1.400-52 16.400-67.900 34.900-17.500 19.800-27.800 44.300-25.600 71.900 26.100 2 49.900-11.400 69.500-34.300z"/></svg>
+        <span><small>{t.store.appleTop}</small><b>{t.store.appleName}</b></span>
+        <span class="sr-only">(откроется в новой вкладке)</span>
+      </a>
+    ) : (
+      <span class="store store--ph" data-store="apple-placeholder" data-placeholder="app-store">
+        <svg width="24" height="28" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.700 268.700c-.2-36.700 16.400-64.400 50-84.800-18.800-26.900-47.200-41.700-84.700-44.600-35.500-2.800-74.300 20.700-88.500 20.700-15 0-49.400-19.700-76.400-19.700C63.300 141.200 4 184.800 4 273.500q0 39.300 14.400 81.200c12.800 36.700 59 126.700 107.200 125.200 25.200-.6 43-17.900 75.800-17.900 31.800 0 48.300 17.900 76.400 17.900 48.600-.7 90.400-82.500 102.600-119.300-65.200-30.700-61.700-90-61.700-91.900zm-56.600-164.200c27.300-32.400 24.800-61.900 24-72.500-24.100 1.400-52 16.400-67.900 34.900-17.500 19.800-27.800 44.300-25.600 71.900 26.100 2 49.900-11.400 69.500-34.300z"/></svg>
+        <span><small>{t.placeholder.tag}: {t.placeholder.appStore}</small><b>{t.store.appleName}</b></span>
+      </span>
+    )}
+  </li>
+</ul>

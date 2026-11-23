@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+import { settings, type Content } from '../content/site';
+interface Props { t: Content }
+const { t } = Astro.props;
+const login = settings.loginUrl ?? '#download';
+---
+<header class="site-header">
+  <div class="container site-header__row">
+    <a class="logo" href="#top" aria-label={t.a11y.home}>
+      <img src="/brand/logo.svg" alt={t.a11y.logoAlt} width="84" height="85" fetchpriority="high" />
+    </a>
+    <nav id="main-nav" class="main-nav" aria-label={t.a11y.mainNav}>
+      <ul>
+        {t.nav.map((item, i) => <li><a href={item.href} aria-current={i === 0 ? 'page' : undefined}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <a class="btn btn--ghost btn--sm header-download" href="#download" aria-label={t.download}><Icon name="download" size={19} /><span>{t.download}</span></a>
+      <a class="btn btn--yellow btn--sm" href={login} data-login><Icon name="user" size={19} /><span>{t.login}</span></a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="main-nav" aria-label={t.a11y.openMenu} data-open={t.a11y.openMenu} data-close={t.a11y.closeMenu}>
+        <Icon name="menu" class="burger__open" /><Icon name="close" class="burger__close" />
+      </button>
+    </div>
+  </div>
+</header>
