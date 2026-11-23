@@ -2,7 +2,7 @@
  * FURA SENTR: ALL EDITABLE CONTENT LIVES IN THIS FILE.
  *
  * - `settings`: store links, contacts, photos and screenshots (shared by all languages).
- * - `ru`: every text on the page. For Uzbek, copy it to `uz` and translate the values.
+ * - `ru` and `uz`: every text on the page. Keep both in the same structure.
  *
  * A value of `null` is a PLACEHOLDER: the page shows a clearly marked stub until it is filled.
  * To replace a category photo, put the file in `src/content/photos/` and write its name below.
@@ -66,6 +66,8 @@ export const ru = {
     stores: 'Скачать приложение',
     logoAlt: 'Логотип Fura Sentr',
     truckAlt: 'Белый магистральный тягач с полуприцепом',
+    newTab: '(откроется в новой вкладке)',
+    language: 'Язык',
   },
   nav: [
     { label: 'Главная', href: '#top' },
@@ -92,7 +94,7 @@ export const ru = {
     appleName: 'App Store',
   },
   menu: {
-    marketplace: { title: 'Marketplace', text: 'Онлайн-покупка запчастей' },
+    marketplace: { title: 'Маркетплейс', text: 'Онлайн-покупка запчастей' },
     trucks: { title: 'Грузовики', text: 'Продажа и покупка грузовиков' },
     jobs: { title: 'Работа', text: 'Поиск работы и водителей' },
     fleet: { title: 'Автопарк', text: 'Управление от 1 до 200 машин' },
@@ -102,7 +104,7 @@ export const ru = {
     wordmark: 'FURA SENTR',
     title: ['единая платформа', 'для грузового бизнеса'],
     subtitle: 'Запчасти, грузовики, работа и управление автопарком — всё в одном месте.',
-    cta: 'Перейти в Marketplace',
+    cta: 'Перейти в Маркетплейс',
   },
   trust: [
     { icon: 'shield', text: ['Проверенные', 'поставщики'] },
@@ -118,7 +120,7 @@ export const ru = {
   blocks: {
     marketplace: {
       index: '01',
-      label: 'Marketplace',
+      label: 'Маркетплейс',
       title: 'Запчасти для грузовика — онлайн',
       text: 'Каталог оригинальных и аналоговых запчастей от проверенных поставщиков. Найдите деталь по марке и модели или просто по фотографии.',
       who: 'Владельцы грузовиков, автопарки, СТО и механики.',
@@ -197,7 +199,7 @@ export const ru = {
     title: 'Стать дилером',
     text: 'Продаёте запчасти для грузовой техники? Разместите ассортимент в Fura Sentr и работайте с покупателями из грузового бизнеса.',
     benefits: [
-      { title: 'Витрина в Marketplace', text: 'Ваши товары в каталоге приложения.' },
+      { title: 'Витрина в Маркетплейсе', text: 'Ваши товары в каталоге приложения.' },
       { title: 'Целевые покупатели', text: 'Владельцы грузовиков, автопарки и СТО.' },
       { title: 'Помощь с подключением', text: 'Подскажем, как начать продавать.' },
     ],
@@ -219,5 +221,177 @@ export const ru = {
 
 export type Content = typeof ru;
 
-/** To launch Uzbek: add `uz: Content` here and create `src/pages/uz/index.astro`. */
-export const locales: Record<string, Content> = { ru };
+export const uz: Content = {
+  lang: 'uz',
+  meta: {
+    title: 'Fura Sentr — yuk tashish biznesi uchun yagona platforma',
+    description:
+      'Ehtiyot qismlar, yuk mashinalari, ish va avtopark boshqaruvi bitta ilovada. Oʻzbekistondagi yuk tashish biznesi uchun platforma.',
+  },
+  a11y: {
+    skip: 'Asosiy mazmunga oʻtish',
+    home: 'Fura Sentr — bosh sahifaga',
+    mainNav: 'Asosiy menyu',
+    blockNav: 'Platforma boʻlimlari',
+    openMenu: 'Menyuni ochish',
+    closeMenu: 'Menyuni yopish',
+    stores: 'Ilovani yuklab olish',
+    logoAlt: 'Fura Sentr logotipi',
+    truckAlt: 'Yarim tirkamali oq magistral tyagach',
+    newTab: '(yangi varaqda ochiladi)',
+    language: 'Til',
+  },
+  nav: [
+    { label: 'Bosh sahifa', href: '#top' },
+    { label: 'Platforma haqida', href: '#about' },
+    { label: 'Imkoniyatlar', href: '#marketplace' },
+    { label: 'Biznes uchun', href: '#dealer' },
+    { label: 'Yordam', href: '#support' },
+  ],
+  download: 'Ilovani yuklab olish',
+  login: 'Kirish',
+  placeholder: {
+    tag: 'Toʻldirish',
+    photo: 'Rasm: almashtirish',
+    screen: 'Skrinshot: qoʻshish',
+    appStore: 'havola',
+    phone: 'Telefon',
+    telegram: 'Telegram',
+    email: 'E-mail',
+  },
+  store: {
+    googleTop: 'Yuklab olish',
+    googleName: 'Google Play',
+    appleTop: 'Yuklab olish',
+    appleName: 'App Store',
+  },
+  menu: {
+    marketplace: { title: 'Marketpleys', text: 'Ehtiyot qismlarni onlayn xarid qilish' },
+    trucks: { title: 'Yuk mashinalari', text: 'Sotish va sotib olish' },
+    jobs: { title: 'Ish', text: 'Ish va haydovchi qidirish' },
+    fleet: { title: 'Avtopark', text: '1 tadan 200 tagacha mashina' },
+    dealer: { title: 'Diler boʻlish' },
+  },
+  hero: {
+    wordmark: 'FURA SENTR',
+    title: ['yuk tashish biznesi', 'uchun yagona platforma'],
+    subtitle: 'Ehtiyot qismlar, yuk mashinalari, ish va avtopark boshqaruvi — barchasi bir joyda.',
+    cta: 'Marketpleysga oʻtish',
+  },
+  trust: [
+    { icon: 'shield', text: ['Tekshirilgan', 'yetkazib beruvchilar'] },
+    { icon: 'box', text: ['Keng', 'assortiment'] },
+    { icon: 'fast', text: ['Tezkor', 'yetkazib berish'] },
+    { icon: 'headset', text: ['24/7', 'yordam'] },
+  ],
+  about: {
+    label: 'Platforma haqida',
+    text: 'Bitta yuk mashinasi yoki butun avtopark — Fura Sentr ishning biznes tomonini osonlashtiradi: ehtiyot qismlar, texnika, kadrlar va hisob-kitob bitta ilovada jamlangan.',
+  },
+  whoLabel: 'Kimlar uchun',
+  blocks: {
+    marketplace: {
+      index: '01',
+      label: 'Marketpleys',
+      title: 'Yuk mashinasi uchun ehtiyot qismlar — onlayn',
+      text: 'Tekshirilgan yetkazib beruvchilarning original va analog ehtiyot qismlari katalogi. Detalni marka va model boʻyicha yoki shunchaki surati orqali toping.',
+      who: 'Yuk mashinasi egalari, avtoparklar, servis markazlari va mexaniklar.',
+      benefits: [
+        { title: 'Marka va model boʻyicha filtr', text: 'Texnikangizga mos detallarni koʻrsatamiz.' },
+        { title: 'Surat orqali qidiruv', text: 'Detalni suratga oling va keragini toping.' },
+        { title: 'Original va analoglar', text: 'Vazifa va byudjetingizga mosini tanlang.' },
+        { title: 'Ilovada buyurtma', text: 'Qidiruvdan xaridgacha — bitta ekranda.' },
+      ],
+      screenAlt: 'Fura Sentr ilovasidagi ehtiyot qismlar doʻkonining asosiy ekrani',
+      cta: 'Ilovada ehtiyot qism xarid qilish',
+      categoriesTitle: 'Ommabop kategoriyalar',
+    },
+    trucks: {
+      index: '02',
+      label: 'Yuk mashinalari',
+      title: 'Yuk mashinasini soting yoki sotib oling',
+      text: 'Tyagach va tirkamalar uchun maxsus maydoncha. Eʼlon joylang yoki xususiy sotuvchilar va kompaniyalar takliflari orasidan texnika toping.',
+      who: 'Tashuvchilar, xususiy sotuvchilar va avtoparkini yangilayotgan kompaniyalar.',
+      benefits: [
+        { title: 'Tyagach va tirkamalar', text: 'Alohida yoki toʻplam holida soting.' },
+        { title: 'Bosqichma-bosqich eʼlon', text: 'Ilovaning oʻzida tushunarli shakl.' },
+        { title: 'Barcha yetakchi markalar', text: 'Yevropa, Xitoy va Rossiya markalari.' },
+      ],
+      brandsTitle: 'Markalar',
+      brands: ['Mercedes-Benz', 'MAN', 'DAF', 'Volvo', 'Iveco', 'Scania', 'Kamaz', 'Renault', 'MAZ', 'Shacman', 'FAW', 'Hino'],
+      screenAlt: 'Tyagach yoki tirkama sotish haqida eʼlon berish ekrani',
+      cta: 'Eʼlon joylash',
+    },
+    jobs: {
+      index: '03',
+      label: 'Ish',
+      title: 'Haydovchilar va ish beruvchilar — bitta maydonchada',
+      text: 'Yuk tashish sohasida ish izlayotganlar va haydovchiga ehtiyoji bor kompaniyalar uchun boʻlim.',
+      who: 'Haydovchilar va transport kompaniyalari.',
+      audiences: [
+        {
+          title: 'Men ish qidiryapman',
+          benefits: ['Yuk tashish biznesidagi vakansiyalar', 'Ilovada haydovchi profili', 'Ish beruvchi bilan toʻgʻridan-toʻgʻri aloqa'],
+        },
+        {
+          title: 'Men haydovchi qidiryapman',
+          benefits: ['Vakansiya joylash', 'Haydovchilar orasidan qidirish', 'Arizalar bir joyda'],
+        },
+      ],
+      screenAlt: 'Fura Sentr ilovasidagi «Ish» boʻlimi ekrani',
+      cta: 'Ish yoki haydovchi topish',
+    },
+    fleet: {
+      index: '04',
+      label: 'Avtopark',
+      title: 'Butun avtopark nazorat ostida',
+      text: 'Yuk mashinalari, haydovchilar, tirkamalar, buyurtmalar, hujjatlar va moliya — jadvallar, messenjerlar va qogʻozlar oʻrniga.',
+      who: 'Yuk mashinasi egalari va transport kompaniyalari.',
+      scale: { from: '1', to: '200', label: 'mashina yagona boshqaruvda' },
+      benefits: [
+        { title: 'Real vaqtdagi xarita', text: 'Har bir mashina qayerda va qanday holatda.' },
+        { title: 'Haydovchi va tirkamalar', text: 'Mashinaga biriktirish, hujjatlar kartochkada.' },
+        { title: 'Buyurtma va reyslar', text: 'Yaratish, holatlar va tasdiqlash.' },
+        { title: 'Daromad va xarajatlar', text: 'Har bir mashina boʻyicha yoqilgʻi, servis va jarimalar.' },
+      ],
+      screenAlt: 'Yuk mashinasi kartochkasi, xarajat va daromadlar koʻrsatilgan «Garaj» ekrani',
+      cta: 'Avtoparkni ulash',
+    },
+  },
+  categories: {
+    body: { name: 'Kuzov qismlari', alt: 'Yuk mashinasi uchun kuzov qismlari' },
+    tires: { name: 'Shinalar', alt: 'Yuk mashinasi uchun shinalar' },
+    batteries: { name: 'Akkumulyatorlar', alt: 'Yuk mashinasi uchun akkumulyatorlar' },
+    brakes: { name: 'Tormoz tizimi', alt: 'Yuk mashinasi tormoz tizimi detallari' },
+    engine: { name: 'Dvigatel', alt: 'Dvigatel va uning ehtiyot qismlari' },
+    suspension: { name: 'Osma tizim', alt: 'Yuk mashinasi osma tizimi detallari' },
+  },
+  dealer: {
+    label: 'Biznes uchun',
+    title: 'Diler boʻlish',
+    text: 'Yuk texnikasi uchun ehtiyot qismlar sotasizmi? Assortimentingizni Fura Sentrʼga joylang va yuk tashish biznesidagi xaridorlar bilan ishlang.',
+    benefits: [
+      { title: 'Marketpleysdagi vitrina', text: 'Mahsulotlaringiz ilova katalogida.' },
+      { title: 'Maqsadli xaridorlar', text: 'Yuk mashinasi egalari, avtoparklar va servislar.' },
+      { title: 'Ulanishda yordam', text: 'Sotuvni qanday boshlashni aytib beramiz.' },
+    ],
+    contactsTitle: 'Biz bilan bogʻlaning',
+  },
+  finalCta: {
+    title: ['Butun yuk tashish biznesi', 'bitta ilovada'],
+    text: 'Fura Sentrʼni yuklab oling va bugun sizga kerakli boʻlimdan boshlang.',
+  },
+  footer: {
+    about: 'Oʻzbekistondagi yuk tashish biznesi uchun yagona platforma.',
+    sections: 'Boʻlimlar',
+    support: 'Yordam',
+    supportNote: '24/7 aloqada',
+    app: 'Ilova',
+    copyright: '© 2026 Fura Sentr · udevs.io · Toshkent, Oʻzbekiston',
+  },
+};
+
+export const locales = { ru, uz };
+export type Locale = keyof typeof locales;
+export const localePaths: Record<Locale, string> = { ru: '/', uz: '/uz/' };
+export const localeNames: Record<Locale, string> = { ru: 'Русский', uz: 'Oʻzbekcha' };

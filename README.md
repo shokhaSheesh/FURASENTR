@@ -1,6 +1,6 @@
 # Fura Sentr landing page
 
-Static one-page site built with Astro. Language: Russian, structured for Uzbek.
+Static one-page site built with Astro. Languages: Russian at `/`, Uzbek (Latin) at `/uz/`.
 
 ## Run
 
@@ -11,11 +11,11 @@ Static one-page site built with Astro. Language: Russian, structured for Uzbek.
 
 ## Edit content
 
-Everything editable is in `src/content/site.ts`: texts, category names and photos, store links and contacts. A `null` value shows a marked placeholder on the page.
+Everything editable is in `src/content/site.ts`: texts in both languages, category names and photos, store links and contacts. A `null` value shows a marked placeholder on the page.
 
 **Replace a category photo:** put the file in `src/content/photos/` (JPG, PNG, WebP or AVIF, at least 1000 px wide, landscape 16:10), then set its name in `settings.categoryPhotos`, for example `engine: 'engine.jpg'`. Resizing and lazy loading are automatic.
 
-**Add Uzbek:** copy `ru` to `uz` in `site.ts`, translate the values, add it to `locales`, and create `src/pages/uz/index.astro`.
+**Edit translations:** both languages are in `site.ts`, as `ru` and `uz`, with the same structure. TypeScript flags a missing key.
 
 ## Backend-driven fields
 

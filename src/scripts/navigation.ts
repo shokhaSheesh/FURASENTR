@@ -106,6 +106,10 @@ document.addEventListener('click', (e) => {
   goTo(id);
 });
 
+document.querySelectorAll<HTMLAnchorElement>('.lang a').forEach((link) => {
+  link.addEventListener('click', () => { link.href = link.pathname + location.hash; });
+});
+
 addEventListener('popstate', () => goTo(location.hash.slice(1) || 'top', false));
 
 if (location.hash) requestAnimationFrame(() => goTo(location.hash.slice(1), false));

@@ -1,8 +1,9 @@
 ---
 import Icon from './Icon.astro';
-import { settings, type Content } from '../content/site';
-interface Props { t: Content }
-const { t } = Astro.props;
+import { localeNames, localePaths, settings, type Content, type Locale } from '../content/site';
+interface Props { t: Content; locale: Locale }
+const { t, locale } = Astro.props;
+const languages = Object.keys(localePaths) as Locale[];
 const login = settings.loginUrl ?? '#download';
 ---
 <header class="site-header">
@@ -16,8 +17,13 @@ const login = settings.loginUrl ?? '#download';
       </ul>
     </nav>
     <div class="site-header__actions">
+      <div class="lang" role="group" aria-label={t.a11y.language}>
+        {languages.map((code) => (
+          <a href={localePaths[code]} hreflang={code} lang={code} aria-label={localeNames[code]} aria-current={code === locale ? 'true' : undefined}>{code.toUpperCase()}</a>
+        ))}
+      </div>
       <a class="btn btn--ghost btn--sm header-download" href="#download" aria-label={t.download}><Icon name="download" size={19} /><span>{t.download}</span></a>
-      <a class="btn btn--yellow btn--sm" href={login} data-login><Icon name="user" size={19} /><span>{t.login}</span></a>
+      <a class="btn btn--yellow btn--sm" href={login} aria-label={t.login} data-login><Icon name="user" size={19} /><span>{t.login}</span></a>
       <button class="burger" type="button" aria-expanded="false" aria-controls="main-nav" aria-label={t.a11y.openMenu} data-open={t.a11y.openMenu} data-close={t.a11y.closeMenu}>
         <Icon name="menu" class="burger__open" /><Icon name="close" class="burger__close" />
       </button>
