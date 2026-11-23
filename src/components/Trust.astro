@@ -1,0 +1,19 @@
+---
+import Icon from './Icon.astro';
+import type { Content } from '../content/site';
+interface Props { t: Content }
+const { t } = Astro.props;
+---
+<section id="about" class="trust" aria-labelledby="about-title" tabindex="-1">
+  <div class="container">
+    <ul class="trust__row">
+      {t.trust.map((item) => (
+        <li><Icon name={item.icon as 'shield'} size={38} /><span>{item.text[0]}<br />{item.text[1]}</span></li>
+      ))}
+    </ul>
+    <div class="about">
+      <h2 id="about-title" class="eyebrow">{t.about.label}</h2>
+      <p>{t.about.text}</p>
+    </div>
+  </div>
+</section>

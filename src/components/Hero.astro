@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import StoreButtons from './StoreButtons.astro';
+import truck from '../assets/hero-truck.webp';
+import wordmark from '../assets/wordmark.svg?raw';
+import type { Content } from '../content/site';
+interface Props { t: Content }
+const { t } = Astro.props;
+---
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <h1>
+        <span class="hero__mark" role="img" aria-label={t.hero.wordmark} set:html={wordmark} />
+        <span class="hero__dash" aria-hidden="true">—</span>
+        <span class="hero__title">{t.hero.title[0]} <br />{t.hero.title[1]}</span>
+      </h1>
+      <p class="hero__sub">{t.hero.subtitle}</p>
+      <div class="hero__actions">
+        <a class="btn btn--yellow btn--lg" href="#marketplace"><Icon name="cart" /><span>{t.hero.cta}</span><Icon name="arrow" size={20} /></a>
+      </div>
+      <StoreButtons t={t} class="hero__stores" />
+    </div>
+    <div class="hero__visual">
+      <svg class="hero__slashes" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path fill="#FFCB00" d="M520 10h150L330 520H130z" />
+        <path fill="none" stroke="#FFCB00" stroke-width="7" d="M720 30 420 480" />
+        <path fill="none" stroke="#D9D9D9" stroke-width="3" d="M60 575 800 500M250 598l550-45" />
+      </svg>
+      <svg class="hero__blueprint" viewBox="0 0 220 380" fill="none" stroke="#000" stroke-width="1.300" aria-hidden="true">
+        <path stroke="#FFCB00" stroke-width="3" d="M2 26V2h24M194 2h24v24M218 354v24h-24M26 378H2v-24" />
+        <circle cx="110" cy="96" r="58" /><circle cx="110" cy="96" r="42" /><circle cx="110" cy="96" r="17" />
+        <g>{[0, 60, 120, 180, 240, 300].map((a) => <circle cx={110 + 29 * Math.cos((a * Math.PI) / 180)} cy={96 + 29 * Math.sin((a * Math.PI) / 180)} r="4" />)}</g>
+        <path d="M96 196h28v12H96zM102 208v14M118 208v14" />
+        <path d="M86 228h48l-48 14h48l-48 14h48l-48 14h48l-48 14h48l-48 14h48" stroke-width="2" />
+        <path d="M102 300v22M118 300v22M94 322h32v14H94zM104 336h12v22h-12z" />
+      </svg>
+      <Image class="hero__truck" src={truck} alt={t.a11y.truckAlt} widths={[420, 640, 860, 1100]} sizes="(max-width: 767px) 88vw, (max-width: 1099px) 620px, 46vw" format="webp" quality={82} loading="eager" fetchpriority="high" />
+    </div>
+  </div>
+</section>

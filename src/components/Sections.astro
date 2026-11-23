@@ -1,0 +1,133 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import Phone from './Phone.astro';
+import StoreButtons from './StoreButtons.astro';
+import Contacts from './Contacts.astro';
+import { categoryPhoto } from '../lib/media';
+import { settings, type CategoryId, type Content } from '../content/site';
+interface Props { t: Content }
+const { t } = Astro.props;
+const { marketplace: m, trucks: tr, jobs: j, fleet: f } = t.blocks;
+const categories = (Object.keys(settings.categoryPhotos) as CategoryId[]).map((id) => ({
+  id, ...t.categories[id], src: categoryPhoto(settings.categoryPhotos[id]),
+}));
+---
+<section id="marketplace" class="block block--market" aria-labelledby="marketplace-title" tabindex="-1">
+  <div class="container">
+    <div class="market__top">
+      <div>
+        <p class="eyebrow"><span>{m.index}</span> {m.label}</p>
+        <h2 id="marketplace-title">{m.title}</h2>
+        <p class="lead">{m.text}</p>
+        <p class="who"><b>{t.whoLabel}:</b> {m.who}</p>
+        <ol class="numbered">
+          {m.benefits.map((b) => <li><b>{b.title}</b><span>{b.text}</span></li>)}
+        </ol>
+        <a class="btn btn--yellow" href={settings.stores.googlePlay} target="_blank" rel="noopener" data-store="google" data-dynamic="stores.google_play_url"><Icon name="download" /><span>{m.cta}</span></a>
+      </div>
+      <Phone file={settings.screens.marketplace} alt={m.screenAlt} t={t} dynamicKey="screens.marketplace" />
+    </div>
+    <h3 class="cats__title">{m.categoriesTitle}</h3>
+    <ul class="cats">
+      {categories.map((c, i) => (
+        <li class="cat" data-dynamic={`categories[${i}]`}>
+          {c.src
+            ? <Image src={c.src} alt={c.alt} widths={[320, 480, 720]} sizes="(max-width: 559px) 50vw, (max-width: 1099px) 33vw, 480px" format="webp" quality={75} loading="lazy" decoding="async" />
+            : <div class="cat__ph" role="img" aria-label={`${t.placeholder.photo}: ${c.alt}`} data-placeholder={`photo-${c.id}`}><Icon name="image" size={30} /><span class="ph-tag">{t.placeholder.photo}</span></div>}
+          <h4>{c.name}</h4>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section id="trucks" class="block block--trucks" aria-labelledby="trucks-title" tabindex="-1">
+  <span class="trucks__ghost" aria-hidden="true">{tr.label}</span>
+  <div class="container trucks__grid">
+    <Phone file={settings.screens.trucks} alt={tr.screenAlt} t={t} dynamicKey="screens.trucks" />
+    <div>
+      <p class="eyebrow eyebrow--ink"><span>{tr.index}</span> {tr.label}</p>
+      <h2 id="trucks-title">{tr.title}</h2>
+      <p class="lead">{tr.text}</p>
+      <p class="who"><b>{t.whoLabel}:</b> {tr.who}</p>
+      <ul class="trucks__benefits">
+        {tr.benefits.map((b) => <li><Icon name="check" size={20} /><div><b>{b.title}</b><span>{b.text}</span></div></li>)}
+      </ul>
+      <div class="brands__wrap" data-dynamic="truck_brands[]">
+        <h3 class="brands__title">{tr.brandsTitle}</h3>
+        <ul class="brands">{tr.brands.map((b) => <li>{b}</li>)}</ul>
+      </div>
+      <a class="btn btn--ink" href={settings.stores.googlePlay} target="_blank" rel="noopener" data-store="google" data-dynamic="stores.google_play_url"><Icon name="download" /><span>{tr.cta}</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="jobs" class="block block--jobs" aria-labelledby="jobs-title" tabindex="-1">
+  <div class="container">
+    <div class="jobs__head">
+      <p class="eyebrow"><span>{j.index}</span> {j.label}</p>
+      <h2 id="jobs-title">{j.title}</h2>
+      <p class="lead">{j.text}</p>
+      <p class="who"><b>{t.whoLabel}:</b> {j.who}</p>
+    </div>
+    <div class="jobs__grid">
+      <article class="aud">
+        <h3>{j.audiences[0].title}</h3>
+        <ul>{j.audiences[0].benefits.map((b) => <li><Icon name="check" size={19} />{b}</li>)}</ul>
+      </article>
+      <Phone file={settings.screens.jobs} alt={j.screenAlt} t={t} dynamicKey="screens.jobs" />
+      <article class="aud aud--yellow">
+        <h3>{j.audiences[1].title}</h3>
+        <ul>{j.audiences[1].benefits.map((b) => <li><Icon name="check" size={19} />{b}</li>)}</ul>
+      </article>
+    </div>
+    <div class="jobs__cta"><a class="btn btn--yellow" href={settings.stores.googlePlay} target="_blank" rel="noopener" data-store="google" data-dynamic="stores.google_play_url"><Icon name="download" /><span>{j.cta}</span></a></div>
+  </div>
+</section>
+
+<section id="fleet" class="block block--fleet" aria-labelledby="fleet-title" tabindex="-1">
+  <div class="container fleet__grid">
+    <div class="fleet__main">
+      <p class="eyebrow"><span>{f.index}</span> {f.label}</p>
+      <h2 id="fleet-title">{f.title}</h2>
+      <p class="lead">{f.text}</p>
+      <p class="who"><b>{t.whoLabel}:</b> {f.who}</p>
+      <p class="scale"><b>{f.scale.from}</b><i aria-hidden="true"></i><b>{f.scale.to}</b><span>{f.scale.label}</span></p>
+      <a class="btn btn--yellow" href={settings.stores.googlePlay} target="_blank" rel="noopener" data-store="google" data-dynamic="stores.google_play_url"><Icon name="download" /><span>{f.cta}</span></a>
+    </div>
+    <Phone file={settings.screens.fleet} alt={f.screenAlt} t={t} dynamicKey="screens.garage" />
+    <ul class="ledger">
+      {f.benefits.map((b, i) => <li><span>{String(i + 1).padStart(2, '0')}</span><b>{b.title}</b><p>{b.text}</p></li>)}
+    </ul>
+  </div>
+</section>
+
+<section id="dealer" class="dealer" aria-labelledby="dealer-title" tabindex="-1">
+  <div class="container">
+    <div class="dealer__card">
+      <div>
+        <p class="eyebrow eyebrow--ink">{t.dealer.label}</p>
+        <h2 id="dealer-title">{t.dealer.title}</h2>
+        <p class="lead">{t.dealer.text}</p>
+        <ul class="dealer__benefits">
+          {t.dealer.benefits.map((b) => <li><Icon name="check" size={20} /><div><b>{b.title}</b><span>{b.text}</span></div></li>)}
+        </ul>
+      </div>
+      <aside class="dealer__contacts" aria-labelledby="dealer-contacts">
+        <h3 id="dealer-contacts">{t.dealer.contactsTitle}</h3>
+        <Contacts t={t} scope="dealer" data={settings.contacts.dealer} />
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="download" class="final" aria-labelledby="final-title" tabindex="-1">
+  <div class="container final__row">
+    <div>
+      <h2 id="final-title">{t.finalCta.title[0]}<br />{t.finalCta.title[1]}</h2>
+      <p class="lead">{t.finalCta.text}</p>
+    </div>
+    <StoreButtons t={t} />
+  </div>
+</section>
