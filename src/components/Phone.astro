@@ -3,16 +3,13 @@ import { Image } from 'astro:assets';
 import { screenImage } from '../lib/media';
 import type { Content } from '../content/site';
 interface Props { file: string | null; alt: string; t: Content; dynamicKey: string; class?: string }
-const { file, alt, t, dynamicKey, class: className } = Astro.props;
+const { file, alt, dynamicKey, class: className } = Astro.props;
 const src = screenImage(file);
 ---
 <figure class:list={['phone', className]} data-dynamic={dynamicKey}>
   {src ? (
     <Image src={src} alt={alt} widths={[280, 420, 600]} sizes="(max-width: 767px) 240px, 300px" format="webp" quality={78} loading="lazy" decoding="async" />
   ) : (
-    <div class="phone__ph" role="img" aria-label={`${t.placeholder.screen}: ${alt}`} data-placeholder="screen">
-      <span class="ph-tag">{t.placeholder.tag}</span>
-      <span>{t.placeholder.screen}</span>
-    </div>
+    <div class="phone__ph" aria-hidden="true" data-placeholder="screen"></div>
   )}
 </figure>

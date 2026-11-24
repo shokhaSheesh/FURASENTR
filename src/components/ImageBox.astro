@@ -1,0 +1,21 @@
+---
+import { Image } from 'astro:assets';
+import { resolveImage, type ImageFolder } from '../lib/media';
+interface Props {
+  value: string | null;
+  folder: ImageFolder;
+  dynamicKey: string;
+  alt?: string;
+  fit?: 'cover' | 'contain';
+  widths?: number[];
+  sizes?: string;
+  class?: string;
+}
+const { value, folder, dynamicKey, alt = '', fit = 'cover', widths = [240, 360, 480], sizes = '240px', class: className } = Astro.props;
+const src = resolveImage(folder, value);
+---
+<div class:list={['imgbox', `imgbox--${fit}`, className]} data-dynamic={dynamicKey} aria-hidden={src ? undefined : 'true'}>
+  {typeof src === 'string'
+    ? <img src={src} alt={alt} loading="lazy" decoding="async" />
+    : src && <Image src={src} alt={alt} widths={widths} sizes={sizes} format="webp" quality={78} loading="lazy" decoding="async" />}
+</div>

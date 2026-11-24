@@ -20,7 +20,9 @@ const { t } = Astro.props;
       <div class="hero__actions">
         <a class="btn btn--yellow btn--lg" href="#marketplace"><Icon name="cart" /><span>{t.hero.cta}</span><Icon name="arrow" size={20} /></a>
       </div>
-      <StoreButtons t={t} class="hero__stores" />
+      <p class="hero__app">{t.apps.ecommerce.name}</p>
+      <StoreButtons t={t} app="ecommerce" class="hero__stores" />
+      <a class="hero__autopark" href="#app-autopark">{t.heroAutopark}<Icon name="arrow" size={18} /></a>
     </div>
     <div class="hero__visual">
       <svg class="hero__slashes" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">

@@ -8,18 +8,28 @@
  * To replace a category photo, put the file in `src/content/photos/` and write its name below.
  */
 
+/** An image: a file name from the matching `src/content/` folder, a full https:// URL, or null (empty box). */
+export type Media = string | null;
+export interface NamedLogo { name: string; logo: Media }
+
 export const settings = {
   /** Shows blue labels on backend-driven fields. Set to false before launch. */
   showDynamicLabels: true,
 
-  stores: {
-    googlePlay: 'https://play.google.com/store/apps/details?id=io.udevs.furasentr_mobile',
-    /** PLACEHOLDER: full App Store link, e.g. https://apps.apple.com/app/id0000000000 */
-    appStore: null as string | null,
+  /** Store links per app. `null` shows a marked placeholder button. */
+  apps: {
+    /** Маркетплейс, Грузовики, Работа. */
+    ecommerce: {
+      googlePlay: 'https://play.google.com/store/apps/details?id=io.udevs.furasentr_mobile' as string | null,
+      /** PLACEHOLDER: e.g. https://apps.apple.com/app/id0000000000 */
+      appStore: null as string | null,
+    },
+    /** Автопарк. PLACEHOLDERS: both store links. */
+    autopark: {
+      googlePlay: null as string | null,
+      appStore: null as string | null,
+    },
   },
-
-  /** PLACEHOLDER: web login address. While empty, «Войти» leads to the app download section. */
-  loginUrl: null as string | null,
 
   contacts: {
     /** PLACEHOLDERS: phone '+998...', telegram 'https://t.me/...', email 'name@domain' */
@@ -43,28 +53,53 @@ export const settings = {
     trucks: 'trucks.webp' as string | null,
     jobs: null as string | null,
     fleet: 'fleet.webp' as string | null,
+    /** Five screenshots under each section. Files from `src/content/screens/` or URLs. */
+    marketplaceStrip: [null, null, null, null, null] as Media[],
+    trucksStrip: [null, null, null, null, null] as Media[],
+    garageStrip: [null, null, null, null, null] as Media[],
   },
+
+  /** Brand and partner logos: files from `src/content/logos/` or URLs. */
+  truckBrands: [
+    { name: 'Volvo', logo: null },
+    { name: 'DAF', logo: null },
+    { name: 'MAN', logo: null },
+    { name: 'Mercedes-Benz', logo: null },
+    { name: 'FAW', logo: null },
+  ] as NamedLogo[],
+  trailerBrands: [
+    { name: 'Krone', logo: null },
+    { name: 'Kögel', logo: null },
+    { name: 'Schmitz', logo: null },
+    { name: 'Schwarzmüller', logo: null },
+    { name: 'Wielton', logo: null },
+  ] as NamedLogo[],
+  partners: [
+    { name: 'Space (akchaev inc)', logo: null },
+    { name: 'AKCHAEV DEVELOPMENTS', logo: null },
+  ] as NamedLogo[],
 };
 
+export type AppId = keyof typeof settings.apps;
 export type CategoryId = keyof typeof settings.categoryPhotos;
 export type BlockId = 'marketplace' | 'trucks' | 'jobs' | 'fleet';
 
 export const ru = {
   lang: 'ru',
   meta: {
-    title: 'Fura Sentr — единая платформа для грузового бизнеса',
+    title: 'Furasentr — единая платформа для грузового бизнеса',
     description:
-      'Запчасти, грузовики, работа и управление автопарком в одном приложении. Платформа для грузового бизнеса в Узбекистане.',
+      'Запчасти, грузовики, работа и управление автопарком в приложениях Furasentr. Платформа для грузового бизнеса в Узбекистане.',
   },
   a11y: {
     skip: 'Перейти к содержанию',
-    home: 'Fura Sentr — на главную',
+    home: 'Furasentr — на главную',
     mainNav: 'Основное меню',
     blockNav: 'Разделы платформы',
     openMenu: 'Открыть меню',
     closeMenu: 'Закрыть меню',
     stores: 'Скачать приложение',
-    logoAlt: 'Логотип Fura Sentr',
+    logoAlt: 'Логотип Furasentr',
     truckAlt: 'Белый магистральный тягач с полуприцепом',
     newTab: '(откроется в новой вкладке)',
     language: 'Язык',
@@ -77,7 +112,6 @@ export const ru = {
     { label: 'Поддержка', href: '#support' },
   ],
   download: 'Скачать приложение',
-  login: 'Войти',
   placeholder: {
     tag: 'Заполнить',
     photo: 'Фото: заменить',
@@ -114,7 +148,7 @@ export const ru = {
   ],
   about: {
     label: 'О платформе',
-    text: 'Один грузовик или целый парк — Fura Sentr упрощает бизнес-сторону работы: запчасти, техника, кадры и учёт собраны в одном приложении.',
+    text: 'Один грузовик или целый парк — Furasentr упрощает бизнес-сторону работы: запчасти, техника, кадры и учёт собраны в приложениях Furasentr.',
   },
   whoLabel: 'Для кого',
   blocks: {
@@ -130,9 +164,11 @@ export const ru = {
         { title: 'Оригинал и аналоги', text: 'Выбирайте вариант под задачу и бюджет.' },
         { title: 'Заказ в приложении', text: 'От поиска до покупки — на одном экране.' },
       ],
-      screenAlt: 'Главный экран магазина запчастей в приложении Fura Sentr',
+      screenAlt: 'Главный экран магазина запчастей в приложении Furasentr',
       cta: 'Купить запчасти в приложении',
       categoriesTitle: 'Популярные категории',
+      perksLabel: 'Условия покупки',
+      perks: ['Доставка по Узбекистану за 1 день', 'По Ташкенту за 1–2 часа', 'Гарантия', 'Возврат', 'Техподдержка 24/7'],
     },
     trucks: {
       index: '02',
@@ -145,8 +181,8 @@ export const ru = {
         { title: 'Объявление по шагам', text: 'Понятная форма прямо в приложении.' },
         { title: 'Все ведущие марки', text: 'От европейских до китайских и российских.' },
       ],
-      brandsTitle: 'Марки',
-      brands: ['Mercedes-Benz', 'MAN', 'DAF', 'Volvo', 'Iveco', 'Scania', 'Камаз', 'Renault', 'МАЗ', 'Shacman', 'FAW', 'Hino'],
+      brandRows: { trucks: 'Грузовики', trailers: 'Прицепы' },
+      modelsNote: 'Более 100 видов моделей грузовиков и прицепов',
       screenAlt: 'Экран подачи объявления о продаже тягача или прицепа',
       cta: 'Разместить объявление',
     },
@@ -166,7 +202,7 @@ export const ru = {
           benefits: ['Публикация вакансии', 'Поиск среди водителей', 'Отклики в одном месте'],
         },
       ],
-      screenAlt: 'Экран раздела «Работа» в приложении Fura Sentr',
+      screenAlt: 'Экран раздела «Работа» в приложении Furasentr',
       cta: 'Найти работу или водителя',
     },
     fleet: {
@@ -197,7 +233,7 @@ export const ru = {
   dealer: {
     label: 'Для бизнеса',
     title: 'Стать дилером',
-    text: 'Продаёте запчасти для грузовой техники? Разместите ассортимент в Fura Sentr и работайте с покупателями из грузового бизнеса.',
+    text: 'Продаёте запчасти для грузовой техники? Разместите ассортимент в Furasentr и работайте с покупателями из грузового бизнеса.',
     benefits: [
       { title: 'Витрина в Маркетплейсе', text: 'Ваши товары в каталоге приложения.' },
       { title: 'Целевые покупатели', text: 'Владельцы грузовиков, автопарки и СТО.' },
@@ -205,9 +241,16 @@ export const ru = {
     ],
     contactsTitle: 'Свяжитесь с нами',
   },
+  apps: {
+    ecommerce: { name: 'Furasentr E-commerce', text: 'Маркетплейс запчастей, покупка и продажа грузовиков, работа.' },
+    autopark: { name: 'Furasentr Autopark', text: 'Управление автопарком: машины, водители, рейсы и финансы.' },
+  },
+  heroAutopark: 'Управляете автопарком? Скачайте Furasentr Autopark',
+  strip: { label: 'Скриншоты приложения', item: 'Скриншот' },
+  partners: { title: 'Разрабатывался с поддержкой' },
   finalCta: {
-    title: ['Весь грузовой бизнес', 'в одном приложении'],
-    text: 'Скачайте Fura Sentr и начните с раздела, который нужен вам сегодня.',
+    title: ['Весь грузовой бизнес', 'в приложениях Furasentr'],
+    text: 'Два приложения: для покупок и объявлений и для управления автопарком. Скачайте то, что нужно вам сегодня.',
   },
   footer: {
     about: 'Единая платформа для грузового бизнеса в Узбекистане.',
@@ -215,7 +258,7 @@ export const ru = {
     support: 'Поддержка',
     supportNote: 'На связи 24/7',
     app: 'Приложение',
-    copyright: '© 2026 Fura Sentr · udevs.io · Ташкент, Узбекистан',
+    copyright: '© 2026 Furasentr · udevs.io · Ташкент, Узбекистан',
   },
 };
 
@@ -224,19 +267,19 @@ export type Content = typeof ru;
 export const uz: Content = {
   lang: 'uz',
   meta: {
-    title: 'Fura Sentr — yuk tashish biznesi uchun yagona platforma',
+    title: 'Furasentr — yuk tashish biznesi uchun yagona platforma',
     description:
-      'Ehtiyot qismlar, yuk mashinalari, ish va avtopark boshqaruvi bitta ilovada. Oʻzbekistondagi yuk tashish biznesi uchun platforma.',
+      'Ehtiyot qismlar, yuk mashinalari, ish va avtopark boshqaruvi Furasentr ilovalarida. Oʻzbekistondagi yuk tashish biznesi uchun platforma.',
   },
   a11y: {
     skip: 'Asosiy mazmunga oʻtish',
-    home: 'Fura Sentr — bosh sahifaga',
+    home: 'Furasentr — bosh sahifaga',
     mainNav: 'Asosiy menyu',
     blockNav: 'Platforma boʻlimlari',
     openMenu: 'Menyuni ochish',
     closeMenu: 'Menyuni yopish',
     stores: 'Ilovani yuklab olish',
-    logoAlt: 'Fura Sentr logotipi',
+    logoAlt: 'Furasentr logotipi',
     truckAlt: 'Yarim tirkamali oq magistral tyagach',
     newTab: '(yangi varaqda ochiladi)',
     language: 'Til',
@@ -249,7 +292,6 @@ export const uz: Content = {
     { label: 'Yordam', href: '#support' },
   ],
   download: 'Ilovani yuklab olish',
-  login: 'Kirish',
   placeholder: {
     tag: 'Toʻldirish',
     photo: 'Rasm: almashtirish',
@@ -286,7 +328,7 @@ export const uz: Content = {
   ],
   about: {
     label: 'Platforma haqida',
-    text: 'Bitta yuk mashinasi yoki butun avtopark — Fura Sentr ishning biznes tomonini osonlashtiradi: ehtiyot qismlar, texnika, kadrlar va hisob-kitob bitta ilovada jamlangan.',
+    text: 'Bitta yuk mashinasi yoki butun avtopark — Furasentr ishning biznes tomonini osonlashtiradi: ehtiyot qismlar, texnika, kadrlar va hisob-kitob Furasentr ilovalarida jamlangan.',
   },
   whoLabel: 'Kimlar uchun',
   blocks: {
@@ -302,9 +344,11 @@ export const uz: Content = {
         { title: 'Original va analoglar', text: 'Vazifa va byudjetingizga mosini tanlang.' },
         { title: 'Ilovada buyurtma', text: 'Qidiruvdan xaridgacha — bitta ekranda.' },
       ],
-      screenAlt: 'Fura Sentr ilovasidagi ehtiyot qismlar doʻkonining asosiy ekrani',
+      screenAlt: 'Furasentr ilovasidagi ehtiyot qismlar doʻkonining asosiy ekrani',
       cta: 'Ilovada ehtiyot qism xarid qilish',
       categoriesTitle: 'Ommabop kategoriyalar',
+      perksLabel: 'Xarid shartlari',
+      perks: ['Oʻzbekiston boʻylab 1 kunda yetkazib berish', 'Toshkent boʻylab 1–2 soatda', 'Kafolat', 'Qaytarish', '24/7 texnik yordam'],
     },
     trucks: {
       index: '02',
@@ -317,8 +361,8 @@ export const uz: Content = {
         { title: 'Bosqichma-bosqich eʼlon', text: 'Ilovaning oʻzida tushunarli shakl.' },
         { title: 'Barcha yetakchi markalar', text: 'Yevropa, Xitoy va Rossiya markalari.' },
       ],
-      brandsTitle: 'Markalar',
-      brands: ['Mercedes-Benz', 'MAN', 'DAF', 'Volvo', 'Iveco', 'Scania', 'Kamaz', 'Renault', 'MAZ', 'Shacman', 'FAW', 'Hino'],
+      brandRows: { trucks: 'Yuk mashinalari', trailers: 'Tirkamalar' },
+      modelsNote: '100 dan ortiq yuk mashinasi va tirkama modellari',
       screenAlt: 'Tyagach yoki tirkama sotish haqida eʼlon berish ekrani',
       cta: 'Eʼlon joylash',
     },
@@ -338,7 +382,7 @@ export const uz: Content = {
           benefits: ['Vakansiya joylash', 'Haydovchilar orasidan qidirish', 'Arizalar bir joyda'],
         },
       ],
-      screenAlt: 'Fura Sentr ilovasidagi «Ish» boʻlimi ekrani',
+      screenAlt: 'Furasentr ilovasidagi «Ish» boʻlimi ekrani',
       cta: 'Ish yoki haydovchi topish',
     },
     fleet: {
@@ -369,7 +413,7 @@ export const uz: Content = {
   dealer: {
     label: 'Biznes uchun',
     title: 'Diler boʻlish',
-    text: 'Yuk texnikasi uchun ehtiyot qismlar sotasizmi? Assortimentingizni Fura Sentrʼga joylang va yuk tashish biznesidagi xaridorlar bilan ishlang.',
+    text: 'Yuk texnikasi uchun ehtiyot qismlar sotasizmi? Assortimentingizni Furasentrʼga joylang va yuk tashish biznesidagi xaridorlar bilan ishlang.',
     benefits: [
       { title: 'Marketpleysdagi vitrina', text: 'Mahsulotlaringiz ilova katalogida.' },
       { title: 'Maqsadli xaridorlar', text: 'Yuk mashinasi egalari, avtoparklar va servislar.' },
@@ -377,9 +421,16 @@ export const uz: Content = {
     ],
     contactsTitle: 'Biz bilan bogʻlaning',
   },
+  apps: {
+    ecommerce: { name: 'Furasentr E-commerce', text: 'Ehtiyot qismlar marketpleysi, yuk mashinalari savdosi va ish.' },
+    autopark: { name: 'Furasentr Autopark', text: 'Avtopark boshqaruvi: mashinalar, haydovchilar, reyslar va moliya.' },
+  },
+  heroAutopark: 'Avtoparkni boshqaryapsizmi? Furasentr Autoparkʼni yuklab oling',
+  strip: { label: 'Ilova skrinshotlari', item: 'Skrinshot' },
+  partners: { title: 'Qoʻllab-quvvatlash bilan ishlab chiqilgan' },
   finalCta: {
-    title: ['Butun yuk tashish biznesi', 'bitta ilovada'],
-    text: 'Fura Sentrʼni yuklab oling va bugun sizga kerakli boʻlimdan boshlang.',
+    title: ['Butun yuk tashish biznesi', 'Furasentr ilovalarida'],
+    text: 'Ikki ilova: xaridlar va eʼlonlar uchun hamda avtoparkni boshqarish uchun. Bugun sizga keragini yuklab oling.',
   },
   footer: {
     about: 'Oʻzbekistondagi yuk tashish biznesi uchun yagona platforma.',
@@ -387,7 +438,7 @@ export const uz: Content = {
     support: 'Yordam',
     supportNote: '24/7 aloqada',
     app: 'Ilova',
-    copyright: '© 2026 Fura Sentr · udevs.io · Toshkent, Oʻzbekiston',
+    copyright: '© 2026 Furasentr · udevs.io · Toshkent, Oʻzbekiston',
   },
 };
 

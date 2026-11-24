@@ -1,0 +1,15 @@
+---
+import ImageBox from './ImageBox.astro';
+import type { Content } from '../content/site';
+interface Props { t: Content; items: (string | null)[]; keyBase: string; name: string }
+const { t, items, keyBase, name } = Astro.props;
+---
+<div class="strip" role="region" aria-label={`${t.strip.label}: ${name}`} tabindex="0">
+  <ul class="strip__list">
+    {items.map((value, i) => (
+      <li>
+        <ImageBox value={value} folder="screens" dynamicKey={`${keyBase}[${i}]`} alt={`${t.strip.item} ${i + 1}`} class="strip__shot" widths={[200, 300, 450]} sizes="(max-width: 1099px) 170px, 230px" />
+      </li>
+    ))}
+  </ul>
+</div>

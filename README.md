@@ -1,4 +1,4 @@
-# Fura Sentr landing page
+# Furasentr landing page
 
 Static one-page site built with Astro. Languages: Russian at `/`, Uzbek (Latin) at `/uz/`.
 
@@ -30,12 +30,21 @@ These fields are labeled in blue on the page. The label text is the field key. T
 | `screens.trucks` | image URL | Грузовики phone |
 | `screens.jobs` | image URL | Работа phone |
 | `screens.garage` | image URL | Автопарк phone |
-| `stores.google_play_url` | URL | All Google Play buttons and section CTAs |
-| `stores.app_store_url` | URL | All App Store buttons |
-| `categories[]` | list of `{ name, image, alt }` | Marketplace category cards |
-| `truck_brands[]` | list of strings | Грузовики brand list |
+| `apps.ecommerce.google_play_url` | URL | Furasentr E-commerce: hero, download section, footer |
+| `apps.ecommerce.app_store_url` | URL | Furasentr E-commerce: hero, download section, footer |
+| `apps.autopark.google_play_url` | URL | Furasentr Autopark: download section, footer |
+| `apps.autopark.app_store_url` | URL | Furasentr Autopark: download section, footer |
+| `screens.marketplace_strip[]` | list of 5 image URLs | Screenshot row under Маркетплейс |
+| `screens.trucks_strip[]` | list of 5 image URLs | Screenshot row under Грузовики |
+| `screens.garage_strip[]` | list of 5 image URLs | Screenshot row under Автопарк |
+| `categories[]` | list of `{ name, image, alt }` | Marketplace category cards (label on each image: `categories[i].image`) |
+| `truck_brands[]` | list of `{ name, logo }` | Грузовики, «Грузовики» brand cards (label on each logo: `truck_brands[i].logo`) |
+| `trailer_brands[]` | list of `{ name, logo }` | Грузовики, «Прицепы» brand cards (label on each logo: `trailer_brands[i].logo`) |
+| `partners[]` | list of `{ name, logo }` | «Разрабатывался с поддержкой», logo only; `name` is the logo's alt text (label on each logo: `partners[i].logo`) |
 | `contacts.dealer.phone`, `.telegram`, `.email` | string | Стать дилером |
 | `contacts.support.phone`, `.telegram`, `.email` | string | Footer |
+
+Images without a value render as empty grey boxes. In `site.ts`, an image value can be a file name from `src/content/photos/`, `screens/` or `logos/`, or a full https:// URL.
 
 Set `settings.showDynamicLabels` to `false` in `src/content/site.ts` to hide the labels. It must be `false` at launch.
 
@@ -43,8 +52,8 @@ Set `settings.showDynamicLabels` to `false` in `src/content/site.ts` to hide the
 
 | Item | Where in `site.ts` |
 | --- | --- |
-| App Store link | `settings.stores.appStore` |
-| Web login address (until set, «Войти» opens the download section) | `settings.loginUrl` |
+| Furasentr E-commerce App Store link | `settings.apps.ecommerce.appStore` |
+| Furasentr Autopark Google Play and App Store links | `settings.apps.autopark` |
 | Dealer phone, Telegram, e-mail | `settings.contacts.dealer` |
 | Support phone, Telegram, e-mail | `settings.contacts.support` |
 | 6 category photos | `settings.categoryPhotos` |

@@ -27,7 +27,12 @@ const links = [
     </div>
     <div>
       <h2>{t.footer.app}</h2>
-      <StoreButtons t={t} class="stores--stack" />
+      {(['ecommerce', 'autopark'] as const).map((app) => (
+        <div class="footer__app">
+          <p class="footer__app-name">{t.apps[app].name}</p>
+          <StoreButtons t={t} app={app} class="stores--stack" />
+        </div>
+      ))}
     </div>
   </div>
   <div class="container footer__bottom"><small>{t.footer.copyright}</small></div>
